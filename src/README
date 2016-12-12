@@ -1,0 +1,36 @@
+// Octavian Guzu - 315 CC //
+
+Task 1:
+	Pentru obtinerea histogramei RGB am efectuat urmatoarele operatii:
+		-din matricea intoarsa de functia "imread" am separat cele 3 matrici R G si B;
+		-am adus toate elementele din R,G si B la valori intre 0 si count_bins-1;
+		-intr-o bucla "for" am numarat elementele si le-am memorat in vectorii aR,aG si aB;
+		-concatenarea celor 3 vectori de mai sus este histograma ceruta.
+		
+Task 2:
+	Pentru obtinerea histogramei HSV am efectuat urmatoarele operatii:
+		-in functia "rgb2hsv2" am realizat conversia matricilor RGB in cele 3 matrici HSV;
+		-am folosit algoritmul din enuntul temei, dar vectorizat pentru a-l putea folosi pe matrici;
+		-m-am folosit de faptul ca H,S si V iau valori intre 0 si 1 pentru a numara toate numere intre i*l si (i+1)*l, unde 1=1:count_bins-1, iar l=1.01/count_bins;
+		-am considerat impartirea intervalului in unitati de 0.01;
+		-concatenarea celor 3 vectori (aH aS si aV) reprezinta histograma ceruta.
+		
+Task 3:
+	In functia preprocess:
+		-m-am folosit de functia "getImgNames" pentru a obtine numele imaginilor din directoarele cats si not_cats;
+		-folosind functii de la task 1 si 2, am construit matricea X,linie cu linie, si vectorul t(adaugandu-i 1 sau -1 in functie de poza citita);
+	In functia learn:
+		-pentru a-l afla pe w din sistemul X*w=t am folosit 2 algoritmi;
+		-pentru inceput am descompus X in Q*R, folosind algoritmul Gram-Schmidt;
+		-m-am folosit de faptul ca Q^(-1)=Q';
+		-am rezolvat apoi un sistem de tip "SST";
+		-mentionez ca functiile gssm(Gram-Schimidt) si SST au fost implementate la laboratoarele de MN;
+		
+Task 4:
+	-folosind w aflat la task 3 si histogramele de la task 1-2 am realizat produsul scalat intre w si x;
+	-numarul y obtinut astfel a fost comparat cu 0;
+	-daca y corespundea cu tipul pozei(<0 pentru not_cats, >0 pentru cats) atunci programul a ghicit corect;
+	ACURATETE:
+		-pentru RGB procentul obtinut este de 84.92 %;
+		-pentru HSV procentul obtinut este de 91.27 %;
+	Am constatat astfel ca, folosind histograma HSV, sansele de a determina tipul unei poze in mod corect sunt considerabil mai MARI decat in cazul RGB.
